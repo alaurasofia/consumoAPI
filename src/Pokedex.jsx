@@ -32,17 +32,17 @@ function Pokedex() {
 
             {
                 pokemons == null ?
-                <p>Lista Vazia</p>
-                :
-                <>
-                 <h2>Nome: {pokemons.name}</h2>
-            <p>Tipo: {pokemons.types[0].type.name}</p>
-            <img src={pokemons.sprites.other.showdown.front_default} />
-                
-                </>
+                    <p>Lista Vazia</p>
+                    :
+                    <>
+                        <h2>Nome: {pokemons.name}</h2>
+                        <p>Tipo: {pokemons.types[0].type.name}</p>
+                        <img src={pokemons.sprites.other.showdown.front_default} />
+
+                    </>
             }
 
-           
+
 
         </div>
     );
