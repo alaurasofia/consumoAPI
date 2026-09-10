@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 
     const [usuarios, setUsuarios] = useState([])
+    const [pesquisa, setPesquisa] = useState("")
 
     async function buscarTodos() {
 
@@ -12,9 +13,20 @@ function App() {
         setUsuarios(data.users)
     }
 
-    function mostrarInformacoes(usuario) {
-        alert("Telefone: " + usuario.phone + "\nEmail: " + usuario.email+"\nMora em: "+ usuario.address.city)
+    async function buscarNome(nome){
+        const response = await fetch("https://dummyjson.com/users/search?q="+nome)
+        const data = await response.json()
+        console.log(data)
+        setUsuarios(data.users)
     }
+
+    function mostrarInformacoes(usuario) {
+        alert("Telefone: " + usuario.phone + "\nEmail: " + usuario.email + "\nMora em: " + usuario.address.city)
+    }
+
+    useEffect(() => {
+        buscarTodos()
+    }, [])
 
     return (
         <div>
@@ -22,14 +34,27 @@ function App() {
             <h1>Consumo de API</h1>
             <p>Buscando dados de API DummyJSON</p>
 
+            <hr />
+            <input onChange={ e => setPesquisa(e.target.value) }  placeholder="Digite um nome..." />
+            <button onClick={ ()=> buscarNome(pesquisa) }> 🔎Pesquisar</button> 
+
             <ul>
                 {
                     usuarios.length == 0 ?
-                        <button onClick={buscarTodos}>Carregar Dados</button>
+                        <p>lista vazia</p>
                         :
                         usuarios.map(
-                            i => <li> Sr(a) {i.firstName} tem {i.age} anos.
-                           < button onClick={() => mostrarInformacoes(i)}>Ver informaçõees</button> </li>
+                            i => <li>
+                                <img
+                                    src={`https://ui-avatars.com/api/?name=${i.firstName}&color=636b2f &rounded=true &background=88e788`}
+                                    alt="{i.firstName}"
+
+                                />
+
+                                {i.gender === "male" ? "O senhor " : "A senhora "}
+                                {i.firstName} tem {i.age} anos.
+                                <button onClick={() => mostrarInformacoes(i)}>Ver informaçõees</button>
+                            </li>
                         )
                 }
 
