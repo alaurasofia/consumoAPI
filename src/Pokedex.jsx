@@ -22,10 +22,10 @@ function Pokedex() {
 
             <div style={{ textAlign: "center", color: "#070bee" }}>
                 <h1>Pokédex</h1>
-                <p>Consulte um Pokémon</p>
+                <h4 style={{ marginTop: "-20px" }} >Consulte um Pokémon</h4>
 
-                <input onChange={e => setPesquisa(e.target.value)} placeholder="Digite o Pokémon" />
-                <button onClick={() => buscarNome(pesquisa)}> 🔎 Pesquisar </button>
+                <input style={{ padding: "10px", borderRadius: "100px", border: "30px" }} onChange={e => setPesquisa(e.target.value)} placeholder="Digite o Pokémon" />
+                <button style={{ padding: "10px", borderRadius: "100px", border: "30px", cursor: "pointer" }} onClick={() => buscarNome(pesquisa)}> 🔎 Pesquisar </button>
 
 
                 <hr />
@@ -36,8 +36,8 @@ function Pokedex() {
                         :
                         <>
                             <h2>Nome: {pokemons.name}</h2>
-                            <p>Tipo: {pokemons.types[0].type.name}</p>
-                            <img src={pokemons.sprites.other.showdown.front_default} />
+                            <h5>Tipo: {pokemons.types[0].type.name}</h5>
+                            <img style={{ width: "150px", textAlign: "center" }} src={pokemons.sprites.other.showdown.front_default} />
 
                         </>
 
